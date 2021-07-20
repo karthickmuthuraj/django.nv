@@ -26,8 +26,17 @@ jobs:
           command: |
             echo "This is an integration step"
             exit 1
+    allow_failure: true
+ 
+  artifact:
+    steps:
+      - run:
+          name: New Artifact job
+          command: echo "hello" > hello.txt
+      - store_artifacts:
+          path: hello.txt
 
-  prod:
+ prod:
     docker:
       - image: python:3.6
     steps:
